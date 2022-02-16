@@ -76,6 +76,9 @@ html{
     margin-top: 15px;
     border: none;
     text-align: center;
+    appearance: none; 
+    /* lỗi nút trên ip: none để bỏ trạng thái mặc định nhưng safari thì cần webkit*/
+    -webkit-appearance: none;
 }
 .btn:hover{
     cursor: pointer;
