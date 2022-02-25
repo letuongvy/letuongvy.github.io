@@ -1,0 +1,471 @@
+*,
+*:before,
+*:after {
+    /* xóa các khoảng cách mặc định */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    /* cick vào mục chạy đến mục đã chọn */
+    scroll-behavior: smooth;
+}
+body{
+    /* Nếu có trình duyệt k dùng đc Roboto thì sẽ chuyển qua sans-serif*/
+    font-family: "Roboto", sans-serif;
+}
+img{
+    /* giúp hình ảnh đc hthi 100% và hình ảnh k bị bể */
+    max-width: 100%;
+    width: 100%;
+}
+.container{
+    max-width: 1200px;
+    width: 100%;
+    /* đặt nằm chính giữa */
+    margin: 0 auto;
+    /* 10px trái và phải */
+    padding: 0 10px;
+}
+button{
+    text-align: center;
+    color: #fff;
+    background-color: var(--gray);
+    padding: .8rem 2.5rem;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: var(--smooth);
+}
+button:hover{
+    background-color: var(--green-l);
+    transition: var(--smooth);
+}
+/* lưu trữ màu cho web */
+:root{
+    --green: #54B192;
+    /* màu này là màu khi hover vào */
+    --green-l: #A4CEC0;
+    --gray: #3F3D56;
+    /* độ mượt tất cả 3s độ mượt ease-in */
+    --smooth: all .3s ease-in;
+}
+/* ===========Overlay========== */
+#overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.4);
+    z-index: 4;
+    display:none;
+}
+#overlay.show{
+    display:initial;
+}
+/* ===========Header=========== */
+header{
+    /* đặt vtri menu sẽ nằm trên banner */
+    position: absolute;
+    width: 100%;
+}
+.navbar{
+    /* tất cả sẽ nằm trên hàng */
+    display: flex;
+    /* tự động tạo kcách */
+    justify-content: space-between;
+    /* chính giữa chiều dọc */
+    align-items: center;
+    /* trái và phải là 0px */
+    padding: 20px 0;
+}
+.navbar_logo img{
+    width: 57px;
+    height: 57px;
+    /* hình ảnh sẽ cover theo kthuoc ta xdinh */
+    object-fit: cover;
+}
+/* menu */
+.navbar_links{
+    /* trên 1 vtri cố định */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 100%;
+    background-color: var(--gray);
+    /* muốn nằm trên các element khác*/
+    z-index: 5;
+    /* nếu có element nào di chuyển thì làm mượt nó */
+    transition: var(--smooth);
+    /* đẩy navbar về phía trái */
+    transform: translateX(-100%);
+    /* độ mờ */
+    opacity: 0;
+
+}
+/* sổ menu ra */
+.navbar_links.navbar_open{
+    transform: translateX(0);
+    opacity: 1;
+    transition: var(--smooth);
+}
+.navbar_link{
+    /* xóa dấu . thẻ a */
+    list-style: none;
+    margin: 55px;
+}
+.navbar_link a{
+    /* xóa dấu _ của chữ thẻ a */
+    text-decoration: none;
+    color: #fff;
+    font-weight:300;
+    transition: var(--smooth);
+}
+.navbar_link a:hover{
+    color: var(--green);
+    transition: var(--smooth);
+}
+.navbar_btn{
+    /* 1rem = 16px */
+    font-size: 1rem;
+    background-color: var(--green);
+    margin-left: 45px;
+}
+/* ====menu button==== */
+.navbar_icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    transition: var(--smooth);
+    z-index: 6;
+}
+.navbar_icon{
+    /* tạo ra 1 gạch menu */
+    width: 45px;
+    height: 6px;
+    background-color: var(--gray);
+    border-radius: 5px;
+    transition: var(--smooth);
+    position: relative;
+}
+/* vẽ 2 gạch trên và dưới */
+.navbar_icon::before,
+.navbar_icon::after{
+    content: "";
+    position: absolute;
+    width: 45px;
+    height: 6px;
+    background-color: var(--gray);
+    border-radius: 5px;
+    transition: var(--smooth);
+}
+/* đẩy 1 gạch lên trên và 1 gạch xuống dưới */
+.navbar_icon::before{
+    transform: translateY(-12px);
+}
+.navbar_icon::after{
+    transform: translateY(12px);
+}
+/* button animation */
+.open .navbar_icon{
+    transform: translateX(-50px);
+    /* màu trong suốt */
+    background: transparent;
+}
+/* từ dấu 3 gạch sang dấu X */
+.open .navbar_icon::before{
+    /* xoay 45 độ */
+    transform: rotate(45deg) translate(35px, -35px);
+}
+.open .navbar_icon:after{
+    transform: rotate(-45deg) translate(35px, 35px);
+}
+
+/* ===Bannner=== */
+#banner {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  
+.banner_img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+}
+  
+.banner_heading {
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--gray);
+}
+  
+.banner_heading h1 {
+    font-size: 2.25rem;
+    padding-top: 4em;
+    margin-bottom: 0.8em;
+}
+  
+.banner_heading p{
+    font-weight: 300;
+    line-height: 2em;
+    /* cách nút button 1.6em */
+    margin-bottom:1.5em;
+}
+.banner_btn{
+    font-size: 1rem;
+}
+.banner_socials{
+    margin-top: 3em;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 1.5rem;
+}
+.banner_socials a{
+    color: var(--gray);
+    transition: var(--smooth);
+
+}
+.banner_socials a:hover{
+    color: var(--green-l);
+    transition: var(--smooth);
+}
+
+
+/* ====Things========= */
+#things{
+    position: relative;
+    overflow-x: hidden;
+    margin-top: 15em;
+}
+#things h2{
+    text-align: center;
+    color: var(--gray);
+    margin-bottom: 3em;
+}
+/* lá bên trái */
+.things_dec{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-60%);
+    z-index: -1;
+}
+/* lá thứ 2 đặt bên phải */
+.things_dec:nth-child(2){
+    top: initial;
+    left: initial;
+    bottom: 15%;
+    right:0;
+    transform: translateX(60%);
+    z-index: -1;
+}
+.things_item{
+    margin: 3em 0;
+}
+.things_item img{
+    padding-bottom: 4em;
+}
+.things_item_heading{
+    text-align:center;
+    color: var(--gray);
+}
+.things_item_heading p{
+    font-weight: 300;
+    line-height: 2em;
+    max-width: 300px;
+    margin: 0 auto;
+    padding-top: 1em;
+}
+
+/* ===Works=== */
+#works {
+    padding-top: 10em;
+    position: relative;
+    overflow-x: hidden;
+}
+
+#works h2{
+    text-align:center;
+    color: var(--gray);
+}
+/* lá trái */
+.works_dec{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-60%);
+    z-index: -1;
+}
+.works_dec:nth-child(2){
+    position: absolute;
+    top: initial;
+    left: initial;
+    bottom: 15%;
+    right:0;
+    transform: translateX(60%);
+    z-index: -1;
+}
+.works_img_single{
+    margin: 2em 0;
+}
+.works_img_single:nth-child(odd){
+    padding-top: 5em;
+}
+.works_img_single:nth-child(3){
+    padding-top: -5em;
+}
+.works_btn{
+    text-align: center;
+    margin-top: 8em;
+}
+.works_btn button{
+    font-size: 1rem;
+}
+
+
+/* ===Footer==== */
+#footer{
+    overflow: hidden;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+.footer_img{
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(25%);
+    z-index: -1;
+}
+.footer_heading{
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--gray);
+}
+.footer_contact{
+    margin-top: 2em;
+    display: flex;
+    justify-content: space-evenly;
+}
+.footer_contact a{
+    text-decoration: none;
+    color: var(--gray);
+}
+.footer_dec{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-45%);
+    z-index: -1;
+}
+/* responsive */
+/* laptop */
+@media (min-width: 62em){
+    .navbar_links{
+        /* initial: ban đầu */
+        position: initial;
+        /* 0 vì k muốn đẩy menu sang trái */
+        transform: translateX(0);
+        opacity: 1;
+        background-color: transparent;
+        display: flex;
+        /* đẩy menu sang phải */
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .navbar_link a{
+        color: var(--gray);
+    }
+    .navbar_icons{
+        display: none;
+    }
+    .navbar_btn{
+        background-color:var(--gray);
+    }
+    .banner_heading{
+        text-align: initial;
+        margin: 0;
+        padding-top: 0;
+    }
+    .banner_socials{
+        justify-content: flex-start;
+    }
+    .banner_socials a{
+        margin-right: 45px;
+    }
+    .banner_img{
+        width: 60%;
+    }
+    .things_item{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
+    }
+    .things_item img{
+        width: 40%;
+        padding-bottom: 0;
+    }
+    .things_item_heading{
+        width: 45%;
+        text-align:initial;
+    }
+    .things_item_heading p {
+        max-width: 500px;
+        margin: 0;
+    }
+    /* đảo lại bên chữ và hình của mục item2 
+        nth-child(odd): order:2 để chọn hàng lẻ 
+    */
+    .things_item:nth-child(odd) img{
+        order: 2;
+        width: 40%;
+        padding-bottom: 0;
+    }
+    .things_item_heading:nth-child(odd){
+        order: 1;
+        width: 45%;
+        text-align:initial;
+    }
+    #works h2{
+        margin-bottom: 3em;
+    }
+    .works_img{
+        display: flex;
+        /* nếu thu nhỏ mh sẽ thành cột */
+        flex-wrap: wrap;
+        justify-content:center;
+    }
+    .works_img_single{
+        margin: 0 3em;
+        width: 35%;
+    }
+    .works_img_single:nth-child(3){
+        margin-top: 0;
+    }
+    .footer_img{
+        top:-15%;
+        right: 0;
+        transform: translateX(32%);
+        width: 60%;
+    }
+    .footer_heading{
+        text-align:initial;
+        margin: 0;
+    }
+    .footer_contact{
+        display: flex;
+        justify-content: space-between;
+    }
+}
